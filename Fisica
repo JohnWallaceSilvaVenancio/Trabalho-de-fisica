@@ -1,0 +1,171 @@
+import java.awt.*;
+import java.awt.event.*;
+import java.lang.Math;
+public class Fisica {
+	int P1,P2,P3;
+    int X1,Y1,X2,Y2,X3,Y3;
+    float FR1, FR2 ,modulo, massa, ac;
+    TextField tfF1,tfF2,tfF3;
+    TextField tfX1,tfY1;
+    TextField tfX2,tfY2;
+    TextField tfX3,tfY3;
+    Label lblF1, lblF11, lblF2, lblF22, lblF3, lblF33;
+    Label lblFR1, lblFR2,lblmodulo, lblmassa, lblac;
+    Button submitButton;
+    public Fisica() {
+    	Frame frame = new Frame("Preencha o local das variaveis:");
+    	frame.setLayout(new GridLayout(11,3,5,5));
+    	TextField tfP1 = new TextField(10);
+    	TextField tfP2 = new TextField(10);
+    	TextField tfP3 = new TextField(10);
+    	TextField tfmassa = new TextField(10);
+    	tfX1 = new TextField(10);
+        tfY1 = new TextField(10);
+        tfX2 = new TextField(10);
+        tfY2 = new TextField(10);
+        tfX3 = new TextField(10);
+        tfY3 = new TextField(10);
+        lblFR1 = new Label();
+        lblFR2 = new Label();
+        submitButton = new Button("Submeter-se");
+        Button resetButton = new Button("Resetar");
+        lblF1 = new Label();
+        lblF11 = new Label();
+        lblF2 = new Label();
+        lblF22 = new Label();
+        lblF3 = new Label();
+        lblF33 = new Label();
+        lblmodulo = new Label();
+        lblmassa = new Label();
+        lblac = new Label();
+        frame.add(new Label("P1:"));
+        frame.add(tfP1);
+        frame.add(new Label("X1:"));
+        frame.add(tfX1);
+        frame.add(new Label("Y1:"));
+        frame.add(tfY1);
+
+        frame.add(new Label("P2:"));
+        frame.add(tfP2);
+        frame.add(new Label("X2:"));
+        frame.add(tfX2);
+        frame.add(new Label("Y2:"));
+        frame.add(tfY2);
+
+        frame.add(new Label("P3:"));
+        frame.add(tfP3);
+        frame.add(new Label("X3:"));
+        frame.add(tfX3);
+        frame.add(new Label("Y3:"));
+        frame.add(tfY3);
+        frame.add(new Label("Massa:"));
+        frame.add(tfmassa);
+        frame.add(new Label("F1:"));
+        frame.add(lblF1);
+        frame.add(new Label("F11:"));
+        frame.add(lblF11);
+
+        frame.add(new Label("F2:"));
+        frame.add(lblF2);
+        frame.add(new Label("F22:"));
+        frame.add(lblF22);
+
+        frame.add(new Label("F3:"));
+        frame.add(lblF3);
+        frame.add(new Label("F33:"));
+        frame.add(lblF33);
+        frame.add(new Label("FR1:"));
+        frame.add(lblFR1);
+        frame.add(new Label("FR2:"));
+        frame.add(lblFR2);
+        frame.add(new Label("Módulo:"));
+        frame.add(lblmodulo);
+        frame.add(new Label("Massa:"));
+        frame.add(lblmassa);
+        frame.add(new Label("Ac:"));
+        frame.add(lblac);
+        frame.add(submitButton);
+        frame.add(resetButton);
+        submitButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					P1 = Integer.parseInt(tfP1.getText());
+                    P2 = Integer.parseInt(tfP2.getText());
+                    P3 = Integer.parseInt(tfP3.getText());
+                    X1 = Integer.parseInt(tfX1.getText());
+                    Y1 = Integer.parseInt(tfY1.getText());
+                    X2 = Integer.parseInt(tfX2.getText());
+                    Y2 = Integer.parseInt(tfY2.getText());
+                    X3 = Integer.parseInt(tfX3.getText());
+                    Y3 = Integer.parseInt(tfY3.getText());
+                    massa = Float.parseFloat(tfmassa.getText());
+                    double F1 = P1 * X1 * 3.14 / 180;
+                    double F11 = P1 * Y1 * 3.14 / 180;
+                    double F2 = P2 * X2 * 3.14 / 180;
+                    double F22 = P2 * Y2 * 3.14 / 180;
+                    double F3 = P3 * X3 * 3.14 / 180;
+                    double F33 = P3 * Y3 * 3.14 / 180;
+                    FR1 = X1 + X2 + X3;
+                    FR2 = Y1 + Y2 + Y3;
+                    modulo = (float) Math.sqrt(Math.pow(FR1, 2) + Math.pow(FR2, 2));
+                    ac = Math.max(FR1, FR2) / massa;
+                    lblF1.setText(String.format("%.2f", F1));
+                    lblF11.setText(String.format("%.2f", F11));
+                    lblF2.setText(String.format("%.2f", F2));
+                    lblF22.setText(String.format("%.2f", F22));
+                    lblF3.setText(String.format("%.2f", F3));
+                    lblF33.setText(String.format("%.2f", F33));
+                    lblFR1.setText(String.format("%.2f", FR1));
+                    lblFR2.setText(String.format("%.2f", FR2));
+                    lblmodulo.setText(String.format("%.2f", modulo));
+                    lblmassa.setText(String.format("%.2f", massa));
+                    lblac.setText(String.format("%.2f", ac));
+                    frame.repaint();
+			}catch (NumberFormatException ex) {
+				System.err.println("Digite valores validos!");
+			}
+        }
+    });
+        resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                P1 = P2 = P3 = X1 = Y1 = X2 = Y2 = X3 = Y3 = 0;
+                tfF1.setText("");
+                tfF2.setText("");
+                tfF3.setText("");
+                tfX1.setText("");
+                tfY1.setText("");
+                tfX2.setText("");
+                tfY2.setText("");
+                tfX3.setText("");
+                tfY3.setText("");
+                tfmassa.setText("");
+                lblF1.setText("");
+                lblF11.setText("");
+                lblF2.setText("");
+                lblF22.setText("");
+                lblF3.setText("");
+                lblF33.setText("");
+                lblFR1.setText("");
+                lblFR2.setText("");
+                lblmodulo.setText("");
+                lblmassa.setText("");
+                lblac.setText("");
+                frame.repaint();
+            }
+        });
+        frame.setSize(400, 400);
+        frame.setVisible(true); 
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
+    }
+        public static void main(String[] args) {
+            new Fisica();
+        }
+}
